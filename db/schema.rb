@@ -62,4 +62,14 @@ ActiveRecord::Schema.define(version: 2019_05_07_140423) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "user1_id"
+    t.bigint "user2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user1_id", "user2_id"], name: "index_friendships_on_user1_id_and_user2_id", unique: true
+    t.index ["user1_id"], name: "index_friendships_on_user1_id"
+    t.index ["user2_id"], name: "index_friendships_on_user2_id"
+  end
+
 end
