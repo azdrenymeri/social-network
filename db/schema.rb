@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_07_140423) do
+ActiveRecord::Schema.define(version: 2019_05_07_171123) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -24,10 +24,26 @@ ActiveRecord::Schema.define(version: 2019_05_07_140423) do
   end
 
   create_table "friend_requests", force: :cascade do |t|
+    t.integer "status"
+    t.integer "sender_id"
+    t.integer "receiver_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sender"
     t.integer "reciever"
+    t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
+    t.index ["sender_id", "receiver_id"], name: "index_friend_requests_on_sender_id_and_receiver_id", unique: true
+    t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user1_id"
+    t.integer "user2_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user1_id", "user2_id"], name: "index_friendships_on_user1_id_and_user2_id", unique: true
+    t.index ["user1_id"], name: "index_friendships_on_user1_id"
+    t.index ["user2_id"], name: "index_friendships_on_user2_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -60,16 +76,6 @@ ActiveRecord::Schema.define(version: 2019_05_07_140423) do
     t.binary "picture"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "friendships", force: :cascade do |t|
-    t.bigint "user1_id"
-    t.bigint "user2_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user1_id", "user2_id"], name: "index_friendships_on_user1_id_and_user2_id", unique: true
-    t.index ["user1_id"], name: "index_friendships_on_user1_id"
-    t.index ["user2_id"], name: "index_friendships_on_user2_id"
   end
 
 end
