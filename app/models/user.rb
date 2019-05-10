@@ -2,12 +2,13 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :friendships, dependent: :destroy
 
-  has_many :friend_requests_sent, foreign_key: :sender_id,
-            class_name: "FriendRequest", dependent: :destroy
+  # has_many :friend_requests_sent, foreign_key: :sender_id,
+  #           class_name: "FriendRequest", dependent: :destroy
 
-  has_many :friend_requests_received, foreign_key: :receiver_id,
-            class_name: "FriendRequest", dependent: :destroy
+  # has_many :friend_requests_received, foreign_key: :receiver_id,
+  #           class_name: "FriendRequest", dependent: :destroy
 
   has_many :friendships, foreign_key: :user1_id, dependent: :destroy
   
@@ -29,7 +30,7 @@ class User < ApplicationRecord
     uniqueness:{case_sensitive: false}
   
   has_secure_password
-  validates :password_digest , presence: true , length: {minimum:6,maximum:50}
+  validates :password_digest , presence: true , length: {minimum:6,maximum:150}
 
 
 end
