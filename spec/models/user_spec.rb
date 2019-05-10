@@ -17,12 +17,15 @@ it "test for email presence" do
   expect(@user).to be_invalid
 end
 
-it "creates post" do
-  user= User.first
-  post= Post.create!(title:'cheese',content:'sandwitch',user:user)
- expect(post).not_to eq(nil)
+it "test for email validation" do
+    @user.email = 'asd@'
+    expect(@user).to be_invalid
 end
 
+it "test for name validation" do
+    @user.first_name = ''
+    expect(@user).to be_invalid
+end
 
 it "destroys dependant post with user" do
   posts=Post.all.count
@@ -37,17 +40,7 @@ it "destroys dependant comments with user" do
   expect(comments).not_to eq(Comment.all.count)
 end
 
-it "destroys dependant likes with post" do
-  
-  
-  like=Like.create!(user:@user,post:@post)
-  likes = Like.all.count
-  @post.destroy
-  expect(likes).not_to eq(Like.all.count)
-end
-
 it "destroy friendship on user delete" do
-  
   
   friendship=Friendship.create!(user1:@user,user2:@user1,status:0)
   friendships = Friendship.all.count
