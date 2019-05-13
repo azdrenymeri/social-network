@@ -21,6 +21,7 @@ test:
   username: admin
   password: admin
 
+
 production:
   <<: *default
   database: social-network
