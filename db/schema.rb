@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_05_09_154804) do
     t.integer "user2_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status"
+    t.integer "status" #0-pending, 1-accepted, 2 - declined
     t.index ["user1_id", "user2_id"], name: "index_friendships_on_user1_id_and_user2_id", unique: true
     t.index ["user1_id"], name: "index_friendships_on_user1_id"
     t.index ["user2_id"], name: "index_friendships_on_user2_id"
