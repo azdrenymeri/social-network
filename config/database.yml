@@ -16,10 +16,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: social-network
-  host: localhost
-  pool: 5
-  username: postgres
-  password: admin
+  
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -42,17 +39,21 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: social-network
-  host: localhost
-  pool: 5
-  username: postgres
-  password: admin
+  database: social-network-test
+  
 
 production:
+  <<: *default
+  database: social-network_production
+  username: social-network
+  password: <%= ENV['SOCIAL-NETWORK_DATABASE_PASSWORD'] %>
+  
+
+  default: &default
   adapter: postgresql
   encoding: unicode
-  database: social-network
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
-  pool: 5
   username: postgres
   password: admin
+  timeout: 5000

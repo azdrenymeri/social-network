@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2019_05_09_154804) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+    t.index ["user_id", "post_id"], name: "index_friendships_on_user_id_and_post_id", unique: true
+
   end
 
   create_table "posts", force: :cascade do |t|
@@ -66,4 +68,8 @@ ActiveRecord::Schema.define(version: 2019_05_09_154804) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "likes", "users"
+  add_foreign_key "posts", "users"
 end
