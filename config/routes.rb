@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   
+  root to:'feeds#index'
+
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
-
-  root to:'feeds#index'
 
   post '/accept', to: 'friendships#accept'
 
