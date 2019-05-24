@@ -1,6 +1,8 @@
 <% if user_signed_in? %>
-  Wellcome <strong> <%= current_user.email  %> </strong> - <%= link_to "Sign out", destroy_user_session_path,method:"DELETE" %>
+  <img class="main-img" alt="image" src = <%= current_user.photo %> />
+   Wellcome <strong> <%= current_user.email  %> </strong> - <%= link_to "Sign out", destroy_user_session_path,method:"DELETE" %>
 <% else %>
-  <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up",new_user_registration_path %>
+    <%= link_to "Login in", new_user_session_path %>
+  | <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path %> 
+  | <%= link_to "Sign up",new_user_registration_path %>
 <% end %>
-</div>

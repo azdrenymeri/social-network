@@ -9,8 +9,9 @@ gem 'rails', '~> 5.2.3'
 # Database gem
 gem 'pg'
 
-# Authentication gem
+# Authentication gem devise
 gem 'devise'
+# omniauth used for authentication with facebook
 gem 'omniauth-facebook'
 
 # Use Puma as the app server
