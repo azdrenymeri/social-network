@@ -1,0 +1,38 @@
+
+
+<% if @pending.count > 0 %>
+    <hr/>
+    <h3> Pending friend friendships </h3>
+    <% @pending.each do |friendship| %>
+      <%= friendship.sender.email %> - 
+      <% @friendship.status = Friendship.statuses[:accepted] %>
+      <%= link_to "Accept", change_friendship_path(friendship.id,Friendship.statuses[:accepted]),method: :put %> 
+    <% end %>
+  <hr/>
+<% end %>
+
+<% if @sended.count > 0 %>
+    <h3> Friend friendships that I have sended </h3>
+    <% @sended.each do |friendship| %>
+        <%= friendship.reciever.email%> - 
+        <%= link_to "Cancel", change_friendship_path(friendship.id,Friendship.statuses[:cancelled]),method: :put %>
+    <% end %>
+    <hr/>
+<% end %>
+
+<% if @friend_list.count > 0 %>
+  <h3> your Friends list </h3>
+    <% @friend_list.each do |friend|%>
+        <ul>
+           <li>
+            <% if friend.photo %>
+            <img alt="friend" src=<%= friend.photo %> /> -  
+            <% end %>
+            <%= friend.email%>
+           </li>
+        <ul>
+    <% end %>
+    <hr/>
+<% else %>
+    <h3> You dont have any friends </h3>
+<% end %>
