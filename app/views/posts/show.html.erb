@@ -1,10 +1,18 @@
 <h1> <%= @post.title%> </h1>
 <p> <strong>Info:</strong> <%= @post.content %>  <p>
 <p> <strong>Created by:</strong> <%= @post.user.email%></p>
-<p> <strong>likes:</strong> 
-<% @post.likes.each do |like| %>
-    <%= like.user.email %></p>
-<% end %>
+<p> <strong>likes:<%= @post.likes.count %> </strong>
+<br> 
+ <% if @post.likes.pluck(:user_id).include?(current_user.id) %>
+			<%= link_to like_path(@post.likes.where(user_id: current_user.id).first.id), method: :delete do %>
+				<span >Dislike</span>
+			<% end %>
+		<% else %>
+			<%= link_to likes_path(post_id: @post.id), method: :post do %>
+				<span >Like</span>
+			<% end %>
+		<% end %> 
+
 
 <p> <strong>comments:</strong> 
 <% @post.comments.each do |comment| %>
