@@ -1,0 +1,19 @@
+<h1> <%= @post.title%> </h1>
+<p> <strong>Info:</strong> <%= @post.content %>  <p>
+<p> <strong>Created by:</strong> <%= @post.user.email%></p>
+<p> <strong>likes:</strong> 
+<% @post.likes.each do |like| %>
+    <%= like.user.email %></p>
+<% end %>
+
+<p> <strong>comments:</strong> 
+<% @post.comments.each do |comment| %>
+    <%= comment.user.email %> <%= comment.content %></p>
+<% end %>
+
+<%= render partial: 'comments/form', locals: { post_id: @post.id } %>
+
+
+
+
+
