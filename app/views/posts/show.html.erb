@@ -1,4 +1,9 @@
-<h1> <%= @post.title%> </h1>
+<h1> <%= @post.title%> 
+<% if current_user == @post.user %>
+		&nbsp;&nbsp; <%= link_to 'Destroy', post_path(@post),
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+		
+	<% end %></h1>
 <p> <strong>Info:</strong> <%= @post.content %>  <p>
 <p> <strong>Created by:</strong> <%= @post.user.email%></p>
 <p> <strong>likes:<%= @post.likes.count %> </strong>
