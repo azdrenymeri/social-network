@@ -1,10 +1,28 @@
 class Friendship < ApplicationRecord
-    enum status: [:sended, :accepted, :declined,:blocked]
     
-    belongs_to :user1, class_name: "User" , foreign_key: 'user1_id'
-    belongs_to :user2, class_name: "User" , foreign_key: 'user2_id'
+    enum status: [:pending, :accepted, :cancelled,:blocked]
+    
+    belongs_to :sender, class_name: "User" , foreign_key: 'user1_id'
+    belongs_to :reciever, class_name: "User" , foreign_key: 'user2_id'
 
-    validates :user1, presence: true
-    validates :user2, presence: true
-  
+    validates :sender, presence: true
+    validates :reciever, presence: true
+
+    # this method will change the status of friendships 
+    # pending(when adding creating a new frienship) 
+    # accepted
+    # cancelled
+    # blocked
+    def self.change_status(id,status)
+
+      friendship = Friendship.find(id.to_i)
+      friendship.status = status.to_i
+      friendship
+    end
+
+    def self.cancel_friendship(sender,reciever)
+      friendship = Friendship.where()
+    end
+
+
   end
