@@ -1,1 +1,26 @@
 <h1> Wellcome To your feeds </h1>
+<% @posts.each do |post| %>
+  <ul>
+  <li> <strong> <%= link_to post.title, post_path(post.id) %>
+  <% if current_user == post.user %>
+		&nbsp;&nbsp; <%= link_to 'Destroy', post_path(post),
+            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+		
+	<% end %>
+   </li> 
+   <li> </strong>- <%= post.content %>  </li>
+  <li> - Created By:  <%= post.user.email %>  </li>
+  <li> - Likes:  <%= post.likes.count %>  </li>
+  <% if post.likes.pluck(:user_id).include?(current_user.id) %>
+			<%= link_to like_path(post.likes.where(user_id: current_user.id).first.id), method: :delete do %>
+				<span >Dislike</span>
+			<% end %>
+		<% else %>
+			<%= link_to likes_path(post_id: post.id), method: :post do %>
+				<span >Like</span>
+			<% end %>
+		<% end %>
+  <%= render post.comments %>
+  <%= render partial: 'comments/form', locals: { post_id: post.id } %>
+	</ul>
+  <% end %>
