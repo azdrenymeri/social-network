@@ -26,7 +26,7 @@
             <% if friend.photo %>
             <img alt="friend" src=<%= friend.photo %> /> -  
             <% end %>
-            <%= friend.email%> <%= link_to "Cancel", change_friendship_path(friendship.id,Friendship.statuses[:cancelled]),method: :put %>
+            <%= friend.email%> 
            </li>
         <ul>
     <% end %>
