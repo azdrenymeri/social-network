@@ -6,6 +6,10 @@ class FeedsController < ApplicationController
         @users= User.all
         @comments=Comment.all
         @likes=Like.all
+        @friendships=Friendship.all
     end
 
+    def users
+        @users=User.all
+    end
 end

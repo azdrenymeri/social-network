@@ -1,11 +1,9 @@
-
-
 <% if @pending.count > 0 %>
     <hr/>
     <h3> Pending friend friendships </h3>
     <% @pending.each do |friendship| %>
       <%= friendship.sender.email %> - 
-      <% @friendship.status = Friendship.statuses[:accepted] %>
+      <% friendship.status = Friendship.statuses[:accepted] %>
       <%= link_to "Accept", change_friendship_path(friendship.id,Friendship.statuses[:accepted]),method: :put %> 
     <% end %>
   <hr/>
@@ -28,7 +26,7 @@
             <% if friend.photo %>
             <img alt="friend" src=<%= friend.photo %> /> -  
             <% end %>
-            <%= friend.email%>
+            <%= friend.email%> <%= link_to "Cancel", change_friendship_path(friendship.id,Friendship.statuses[:cancelled]),method: :put %>
            </li>
         <ul>
     <% end %>
