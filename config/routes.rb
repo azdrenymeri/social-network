@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   get "/friendships", to:"friendships#index"
 
   put "/change/:friendship/stat/:status",to:"friendships#change", as:"change_friendship"
+  
 
   resources :posts , only:[:index,:new,:show,:create,:destroy]
   resources :comments , only:[:create,:destroy]
   resources :likes, only:[:create, :destroy]
-  resources :feeds
-  
+  resources :users, only:[:index,:show]
+  resources :friendships, only:[:create]
 end

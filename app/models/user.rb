@@ -49,9 +49,26 @@ class User < ApplicationRecord
 
   # get all friends that have been accepted
   def self.friend_list(user)
+ 
+    lst = Array.new
+    
     sended = user.sended_friend_requests.where(status: Friendship.statuses[:accepted])
+    
+    sended.each do |request|
+     lst << request.reciever
+    end
+
     recieved = user.recieved_friend_requests.where(status: Friendship.statuses[:accepted])
-    res = sended.merge(recieved)
-    res
+
+    recieved.each do |request|
+      lst << request.sender
+    end
+    
+    lst
+  end
+
+  def self.people_you_might_know(user)
+    might_know  = User.where.not(id: User.friend_list(user).pluck(:id))
+    might_know
   end
 end

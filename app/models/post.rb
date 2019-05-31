@@ -15,7 +15,16 @@ class Post < ApplicationRecord
   def self.feeds(user)
 
     friends = User.friend_list(user)
-    posts = friends.posts
+
+    posts = Array.new
+
+    # TODO optimize this query 
+   friends.each do |friend|
+      friend.posts.each do |post|
+        posts << post
+      end
+    end
+
     posts
   end
   
