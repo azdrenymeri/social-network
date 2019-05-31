@@ -1,22 +1,16 @@
 <% if user_signed_in? %>
-<<<<<<< HEAD
   <% if current_user.photo %>
     <img class="main-img" alt="image" src = <%= current_user.photo %> />
   <% end %>
    Wellcome <strong> <%= current_user.email  %> </strong>
    | <%= link_to "Main", root_path %> 
    | <%= link_to "Sign out", destroy_user_session_path,method:"DELETE" %>
+   | <%= link_to "Create a new post", new_post_path %>
    <% if User.pending_friend_requests(current_user).count > 0 %>
     | You have <%= link_to User.pending_friend_requests(current_user).count,friendships_path %> friend requests
     <% else %>
-    | <%= link_to "Friendships", friendships_path %>
+    | <%= link_to "Friends", friendships_path %>
    <% end %>
-=======
-  <img class="main-img" alt="image" src = <%= current_user.photo %> />
-   Wellcome <strong> <%= current_user.email  %> </strong> - <%= link_to "Sign out", destroy_user_session_path,method:"DELETE" %>
-  <%= link_to "News Feed", root_path %>
-  <%= link_to "Create Post", new_post_path %> - 
->>>>>>> f69f4975ce9a1850e90736548e4c23e4f0c5d840
 <% else %>
     <%= link_to "Login in", new_user_session_path %>
   | <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path %> 

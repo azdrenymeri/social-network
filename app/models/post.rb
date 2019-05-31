@@ -4,6 +4,19 @@ class Post < ApplicationRecord
   validates :user, presence: true
 
   belongs_to :user
+
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :users, through: :likes
+
+
+
+
+  def self.feeds(user)
+
+    friends = User.friend_list(user)
+    posts = friends.posts
+    posts
+  end
+  
 end

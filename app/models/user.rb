@@ -3,15 +3,17 @@ class User < ApplicationRecord
   has_many :sended_friend_requests, foreign_key: "user1_id",class_name: "Friendship"
   has_many :recieved_friend_requests, foreign_key: "user2_id",class_name: "Friendship"
 
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:omniauthable, omniauth_providers: %i[facebook]
 
-         has_many :comments, dependent: :destroy
-         has_many :likes, dependent: :destroy
-         has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :liked_posts, :through => :likes, :source => :post
+  has_many :commented_posts,:through => :comments,:source => :post
+
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -47,22 +49,9 @@ class User < ApplicationRecord
 
   # get all friends that have been accepted
   def self.friend_list(user)
- 
-    lst = Array.new
-    
     sended = user.sended_friend_requests.where(status: Friendship.statuses[:accepted])
-    
-    sended.each do |request|
-     lst << request.reciever
-    end
-
     recieved = user.recieved_friend_requests.where(status: Friendship.statuses[:accepted])
-
-    recieved.each do |request|
-      lst << request.sender
-    end
-    
-    lst
+    res = sended.merge(recieved)
+    res
   end
-
 end
