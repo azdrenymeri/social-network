@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :commented_posts,:through => :comments,:source => :post
 
 
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
       
@@ -39,12 +40,14 @@ class User < ApplicationRecord
 
   # get all pending requests for a user
   def self.pending_friend_requests(user)
-    user.recieved_friend_requests.where(status: Friendship.statuses[:pending])
+  recieved =  user.recieved_friend_requests.where(status: Friendship.statuses[:pending])
+  recieved
   end
   
   # get all requests that you have sended to other users
   def self.sended_pending_friend_requests(user)
-    user.sended_friend_requests.where(status: Friendship.statuses[:pending])
+   sended =  user.sended_friend_requests.where(status: Friendship.statuses[:pending])
+   sended
   end
 
   # get all friends that have been accepted
@@ -68,7 +71,18 @@ class User < ApplicationRecord
   end
 
   def self.people_you_might_know(user)
-    might_know  = User.where.not(id: User.friend_list(user).pluck(:id))
+    # might_know  = User.where(id: User.friend_list(user).pluck(:id).to_a)
+    might_know = User.where.not("id = ?",user.id)
+    recieved_friend_requests = User.pending_friend_requests(user).pluck("user1_id")
+    sended_friend_requests  =  User.sended_pending_friend_requests(user).pluck("user2_id")
+    
+    if recieved_friend_requests.any?
+      might_know = might_know.where.not(id:recieved_friend_requests)
+    end
+
+    if sended_friend_requests.any?
+      might_know = might_know.where.not(id:sended_friend_requests)
+    end
     might_know
   end
 end

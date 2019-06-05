@@ -1,26 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  username: postgres
+  password:  admin
+  timeout: 5000
 
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: social-network-development-db
-  pool: 5
-  host: localhost
-  username: postgres
-  password: admin
+  <<: *default
+  database: social_network_development_db 
 
 test:
-  adapter: postgresql
-  encoding: unicode
-  database: social-network-test-db
-  pool: 5
-  host: localhost
-  username: postgres
-  password: admin
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: social-network-production-db
-  pool: 5
-  username: postgres
-  password: admin
+  <<: *default
+  database: social_network_test_db 

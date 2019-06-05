@@ -11,30 +11,20 @@ class PostsController < ApplicationController
     end
 
     def new
-        if current_user
-            @post = Post.new
-        else
-            redirect_to login_path 
-        end
+        @post = Post.new
     end
     
     def show
         @post = Post.find(params[:id])
     end
 
-    def create
-        if current_user
-            
+    def create 
         @post =  current_user.posts.build(post_params)
-            if @post.save
-                redirect_to post_path(@post)
-            else
-                render "new"
-            end
+        if @post.save
+            redirect_to post_path(@post)
         else
-            redirect_to login_path
+            render "new"
         end
-
     end
 
     def destroy

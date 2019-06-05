@@ -6,12 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# creating users
+azdren = User.create(email:'azdreny@gmail.com',password:'1234567')
+foo = User.create(email:'foo@bar.com',password:'1234567')
+john = User.create(email:'john@example.com',password:'1234567')
+janed = User.create(email:'janed@gmail.com',password:'1234567')
 
-# creating a two users
-# user1 = User.create(first_name:"John",last_name:"Doe",DOB:DateTime.now,email:"john@example.com"
-#                     password_digest:"12345678")
-# user2 = User.create(first_name:"Janed",last_name:"Doe",DOB:DateTime.now),email:"janed@example.com"
-#                     password_digest:"87654321")
 
 # # Now creating posts 
 # post1  = Post.create(user:user1,title:'Yay my first post',content:'this is my very first post on this site')

@@ -7,12 +7,8 @@ class FriendshipsController < ApplicationController
       @friend_list = User.friend_list(current_user)
     end
 
-    def new
-      if current_user
-          @friendship = Friendship.new
-      else
-          redirect_to login_path 
-      end
+  def new
+    @friendship = Friendship.new
   end
   
   def create
@@ -25,7 +21,6 @@ class FriendshipsController < ApplicationController
   end
 
     def change
-
       friendship =  Friendship.change_status(params[:friendship],params[:status])
       
       if friendship.save
@@ -35,4 +30,16 @@ class FriendshipsController < ApplicationController
 
     end
 
+    def destroy
+      
+      friendship = Friendship.cancel_friendship(params[:id])
+
+      if friendship.destroy
+        flash[:success] = "Success"
+      else
+        flash[:dange] = "Something went wrong"
+      end
+
+      redirect_to friendships_path
+    end
 end

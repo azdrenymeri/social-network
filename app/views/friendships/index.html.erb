@@ -13,7 +13,7 @@
     <h3> Friend friendships that I have sended </h3>
     <% @sended.each do |friendship| %>
         <%= friendship.reciever.email%> - 
-        <%= link_to "Cancel", change_friendship_path(friendship.id,Friendship.statuses[:cancelled]),method: :put %>
+        <%= link_to "Cancel", friendship_path(friendship),method: :delete %>
     <% end %>
     <hr/>
 <% end %>
