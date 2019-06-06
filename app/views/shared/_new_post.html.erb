@@ -1,4 +1,4 @@
-<%= form_for @post ,controller:"feeds",action:"create", method:"POST" do |f| %>
+<%= form_for @post ,controller:"posts",action:"create", method:"POST" do |f| %>
     <%= f.label :title%>
     <%= f.text_field :title,placeholder: "Your post title" %>
     <br/><br/>

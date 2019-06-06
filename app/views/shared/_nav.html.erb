@@ -7,7 +7,6 @@
    | <%= link_to "Create Post", new_post_path %> 
    | <%= link_to "Profile", user_path(current_user.id)%> 
    | <%= link_to "Sign out", destroy_user_session_path,method:"DELETE" %>
-   | <%= link_to "Create a new post", new_post_path %>
    | <%= link_to "People you might know", users_path ,method:"GET"%>
    
    <% if User.pending_friend_requests(current_user).count > 0 %>

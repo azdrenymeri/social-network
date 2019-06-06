@@ -75,9 +75,14 @@ class User < ApplicationRecord
     might_know = User.where.not("id = ?",user.id)
     recieved_friend_requests = User.pending_friend_requests(user).pluck("user1_id")
     sended_friend_requests  =  User.sended_pending_friend_requests(user).pluck("user2_id")
-    
+    friends = User.friend_list(user)
+
     if recieved_friend_requests.any?
       might_know = might_know.where.not(id:recieved_friend_requests)
+    end
+
+    if friends.any?
+      might_know = might_know.where.not(id:friends)
     end
 
     if sended_friend_requests.any?
