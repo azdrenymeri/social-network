@@ -10,8 +10,7 @@ class Post < ApplicationRecord
   has_many :users, through: :likes
 
 
-
-
+  
   def self.feeds(user)
 
     friends = User.friend_list(user)
