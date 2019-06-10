@@ -2,7 +2,8 @@
     
     <br/><br/>
     <%= f.label :content%>
-    <%= f.text_area :content ,placeholder: "Content"%>
+    <%= f.text_area :content ,placeholder: "Content"%><br/>
+    <%= f.file_field :picture %><br/>
     <br/></br>
 <%= f.submit "Create Post" %>
 <% end %>

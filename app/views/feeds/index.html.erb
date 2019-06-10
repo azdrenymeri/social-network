@@ -9,6 +9,9 @@
             data: {:confirm => 'Are you sure?'}, :method => :delete %>
 		
 	<% end %></li>
+	<% if post.picture.attached? %>
+	<image src="<%=(url_for(post.picture))%>">
+<% end %>
   <li> - Created By:  <%= post.user.email %>  </li>
   <li> - Likes:  <%= post.likes.count %>  </li>
   <% if post.likes.pluck(:user_id).include?(current_user.id) %>

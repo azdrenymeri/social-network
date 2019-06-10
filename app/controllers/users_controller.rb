@@ -8,6 +8,17 @@ class UsersController < ApplicationController
         
     end
 
+    def edit
+        @user=User.find(params[:id])
+    end
+
+    def update
+        @user = Article.find(params[:id])
+        @user.update(name: params[:name], bio: params[:bio])
+        @user.avatar.attach(params[:avatar])
+        redirect_to feeds_path
+    end
+
     def show
         @user = User.find(params[:id])
     end

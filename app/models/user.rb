@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  has_one_attached :picture
   has_many :sended_friend_requests, foreign_key: "user1_id",class_name: "Friendship"
   has_many :recieved_friend_requests, foreign_key: "user2_id",class_name: "Friendship"
 

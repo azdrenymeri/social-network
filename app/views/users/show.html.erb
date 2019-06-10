@@ -1,18 +1,24 @@
 <center>
 <br>
-<img alt="profile picture" src = <%= @user.photo %> />
+"Profile photo"
+<%# <img alt="profile picture" src = <%= @user.photo %> /> %>
+<% if @user.picture.attached? %>
+	<image src="<%=(url_for(@user.picture))%>">
+<% end %>
 <h2> <%= @user.email%> </h2> 
 
 <% @user.posts.each do |post| %>
   <ul>
-  <li> <strong> <%= link_to post.title, post_path(post.id) %>
-  <% if current_user == post.user %>
+  
+   <li> </strong>- <%= post.content %>  
+   <% if current_user == post.user %>
 		&nbsp;&nbsp; <%= link_to 'Destroy', post_path(post),
             data: {:confirm => 'Are you sure?'}, :method => :delete %>
 		
-	<% end %>
-   </li> 
-   <li> </strong>- <%= post.content %>  </li>
+	<% end %></li>
+  <% if post.picture.attached? %>
+	<image src="<%=(url_for(post.picture))%>">
+<% end %>
   <li> - Created By:  <%= post.user.email %>  </li>
   <li> - Likes:  <%= post.likes.count %>  </li>
   <% if post.likes.pluck(:user_id).include?(current_user.id) %>
