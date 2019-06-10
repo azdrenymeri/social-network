@@ -1,13 +1,8 @@
 class LikesController < ApplicationController
-    before_action :logged_in_user
-    before_action :correct_user, only: :destroy
+  before_action :authenticate_user!
   
     def new
-        if current_user
-            @like = Like.new
-        else
-            redirect_to login_path 
-        end
+        @like = Like.new
     end
 
     def create

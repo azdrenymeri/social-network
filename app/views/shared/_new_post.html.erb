@@ -1,9 +1,9 @@
-<%= form_for @post ,controller:"feeds",action:"create", method:"POST" do |f| %>
-    <%= f.label :title%>
-    <%= f.text_field :title,placeholder: "Your post title" %>
+<%= form_for @post ,controller:"posts",action:"create", method:"POST" do |f| %>
+    
     <br/><br/>
     <%= f.label :content%>
-    <%= f.text_area :content ,placeholder: "Content"%>
+    <%= f.text_area :content ,placeholder: "Content"%><br/>
+    <%= f.file_field :picture %><br/>
     <br/></br>
 <%= f.submit "Create Post" %>
 <% end %>

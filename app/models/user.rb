@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-
-
+  has_one_attached :picture
   has_many :sended_friend_requests, foreign_key: "user1_id",class_name: "Friendship"
   has_many :recieved_friend_requests, foreign_key: "user2_id",class_name: "Friendship"
 
@@ -74,9 +73,14 @@ class User < ApplicationRecord
     might_know = User.where.not("id = ?",user.id)
     recieved_friend_requests = User.pending_friend_requests(user).pluck("user1_id")
     sended_friend_requests  =  User.sended_pending_friend_requests(user).pluck("user2_id")
-    
+    friends = User.friend_list(user)
+
     if recieved_friend_requests.any?
       might_know = might_know.where.not(id:recieved_friend_requests)
+    end
+
+    if friends.any?
+      might_know = might_know.where.not(id:friends)
     end
 
     if sended_friend_requests.any?

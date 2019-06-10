@@ -10,14 +10,7 @@ class FeedsController < ApplicationController
         @friendships=Friendship.all
     end
 
-    def new
-        @post = Post.new
-    end
-
-    def create 
-        flash[:success] = "Its working fine"
-        redirect_to root_path
-    end
+    
 
 
     private

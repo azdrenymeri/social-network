@@ -3,7 +3,20 @@ class UsersController < ApplicationController
 
     def index
         @users = User.people_you_might_know(current_user)
+        @strangers = User.all - User.people_you_might_know(current_user)
+        @z=User.all
         
+    end
+
+    def edit
+        @user=User.find(params[:id])
+    end
+
+    def update
+        @user = Article.find(params[:id])
+        @user.update(name: params[:name], bio: params[:bio])
+        @user.avatar.attach(params[:avatar])
+        redirect_to feeds_path
     end
 
     def show
