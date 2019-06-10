@@ -13,10 +13,17 @@ class UsersController < ApplicationController
     end
 
     def update
-        @user = Article.find(params[:id])
+        @user = User.find(params[:id])
         @user.update(name: params[:name], bio: params[:bio])
-        @user.avatar.attach(params[:avatar])
-        redirect_to feeds_path
+        @user.picture.attach(params[:picture])
+        puts "fucking shit"
+        puts "fucking shit"
+        puts "fucking shit"
+        puts "fucking shit"
+        puts "fucking shit"
+        puts "fucking shit"
+        puts @user.picture
+        redirect_to root_path
     end
 
     def show
@@ -25,6 +32,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:id)
+        params.require(:user).permit(:id, :picture)
     end
 end
