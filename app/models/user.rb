@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 
+
   has_many :sended_friend_requests, foreign_key: "user1_id",class_name: "Friendship"
   has_many :recieved_friend_requests, foreign_key: "user2_id",class_name: "Friendship"
 
@@ -15,10 +16,8 @@ class User < ApplicationRecord
   has_many :commented_posts,:through => :comments,:source => :post
 
 
-
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
-      
       user.email = auth.info.email
       user.provider = auth.provider
       user.uid = auth.uid
