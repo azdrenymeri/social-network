@@ -10,20 +10,20 @@ class UsersController < ApplicationController
 
     def edit
         @user=User.find(params[:id])
+        
     end
 
     def update
         @user = User.find(params[:id])
-        @user.update(name: params[:name], bio: params[:bio])
-        @user.picture.attach(params[:picture])
-        puts "fucking shit"
-        puts "fucking shit"
-        puts "fucking shit"
-        puts "fucking shit"
-        puts "fucking shit"
-        puts "fucking shit"
-        puts @user.picture
-        redirect_to root_path
+        if @user.update(name: params[:name], bio: params[:bio])
+            @user.picture.attach(params[:picture])
+            redirect_to root_path
+            
+        else
+            render "edit"
+        end
+        
+        
     end
 
     def show
