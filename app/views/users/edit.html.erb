@@ -5,12 +5,6 @@
   <%= form_for current_user ,controller:"users",action:"update", method:"PATCH" do |f| %>
     
 
-      <%= f.label :name %>
-      <%= f.text_field :name %><br><br>
-
-        <%= f.label :bio %>
-      <%= f.text_field :bio %><br><br>
-
       <%= f.label :picture %>
       <%= f.file_field :picture %><br><br>
 

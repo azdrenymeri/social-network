@@ -1,11 +1,11 @@
-<center>
+
 <br>
 Profile photo
 <% if @user.picture.attached? %>
-	<image src="<%=(url_for(@user.picture))%>">
+	<%= image_tag @user.picture %>
 <% end %>
 <h2> <%= @user.email%> </h2> 
-<h2> <%= @user.name%> </h2> 
+
 <% @user.posts.each do |post| %>
   <ul>
   
@@ -33,7 +33,7 @@ Profile photo
   <%= render partial: 'comments/form', locals: { post_id: post.id } %>
 	</ul>
   <% end %>
-</center>
+
 
 
 

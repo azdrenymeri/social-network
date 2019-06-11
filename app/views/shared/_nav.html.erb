@@ -8,7 +8,7 @@
    | <%= link_to "Main", root_path %>
    | <%= link_to "Create Post", new_post_path %> 
    | <%= link_to "Profile", user_path(current_user.id)%>
-   | <%= link_to "Edit profile", edit_user_path(current_user)%> 
+   | <%= link_to "Edit profile picture", edit_user_path(current_user)%> 
    | <%= link_to "Sign out", destroy_user_session_path,method:"DELETE" %>
    | <%= link_to "People you might know", users_path ,method:"GET"%>
    

@@ -15,15 +15,13 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        if @user.update(name: params[:name], bio: params[:bio])
-            @user.picture.attach(params[:picture])
-            redirect_to root_path
-            
-        else
+        if params[:user][:picture].nil?
             render "edit"
+        else
+            @user.picture.purge
+            @user.picture.attach(params[:user][:picture])
+            redirect_to root_path
         end
-        
-        
     end
 
     def show
