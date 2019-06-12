@@ -1,8 +1,7 @@
 <%= form_for @post ,controller:"posts",action:"create", method:"POST" do |f| %>
     
     <br/><br/>
-    <%= f.label :content%>
-    <%= f.text_area :content ,placeholder: "Content"%><br/>
+    <%= f.text_area :content ,placeholder: "Content"%><br>
     <%= f.file_field :picture %><br/>
     <br/></br>
 <%= f.submit "Create Post" %>

@@ -1,9 +1,11 @@
 <%= stylesheet_link_tag "/application.css" %>
+<div class="body">
 <h1> Wellcome To your feeds </h1>
 <%= render './shared/new_post' %>
 <hr/>
+<div class="posts">
 <% @posts.each do |post| %>
-  <ul>
+  <ul class='posts'>
   
    <li> </strong>- <%= post.content %>  <% if current_user == post.user %>
 		&nbsp;&nbsp; <%= link_to 'Destroy', post_path(post),
@@ -11,7 +13,7 @@
 		
 	<% end %></li>
 	<% if post.picture.attached? %>
-	<image src="<%=(url_for(post.picture))%>">
+	<%= image_tag post.picture, :class => "post_image"%>
 <% end %>
   <li> - Created By:  <%= post.user.email %>  </li>
   <li> - Likes:  <%= post.likes.count %>  </li>
@@ -28,3 +30,5 @@
   <%= render partial: 'comments/form', locals: { post_id: post.id } %>
 	</ul>
   <% end %>
+  </div>
+  </div>
