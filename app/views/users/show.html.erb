@@ -1,4 +1,4 @@
-<div class="body">
+<body class="body">
 <br>
 Profile photo
 <br>
@@ -8,33 +8,37 @@ Profile photo
 <h2> <%= @user.email%> </h2> 
 
 <% @user.posts.each do |post| %>
-  <ul>
-  
-   <li> </strong>- <%= post.content %>  
-   <% if current_user == post.user %>
-		&nbsp;&nbsp; <%= link_to 'Destroy', post_path(post),
-            data: {:confirm => 'Are you sure?'}, :method => :delete %>
+<div class="posts">
+	<br>
+  		Content: <%= post.content %>  
+		<% if current_user == post.user %>
+				&nbsp;&nbsp; <%= link_to 'Destroy', post_path(post),
+            	data: {:confirm => 'Are you sure?'}, :method => :delete %>
 		
-	<% end %></li>
-  <% if post.picture.attached? %>
-	<%= image_tag post.picture ,:class=>"profile_big" %>
-<% end %>
-  <li> - Created By:  <%= post.user.email %>  </li>
-  <li> - Likes:  <%= post.likes.count %>  </li>
-  <% if post.likes.pluck(:user_id).include?(current_user.id) %>
-			<%= link_to like_path(post.likes.where(user_id: current_user.id).first.id), method: :delete do %>
-				<span >Dislike</span>
-			<% end %>
-		<% else %>
+		<% end %> <br>
+
+	<% if post.picture.attached? %>
+		<%= image_tag post.picture, :class => "post_image"%> <br>
+	<% end %>
+
+   Created By:  <%= post.user.email %> <br>
+   Likes:  <%= post.likes.count %> 
+   
+  	<% if post.likes.pluck(:user_id).include?(current_user.id) %>
+				<%= link_to like_path(post.likes.where(user_id: current_user.id).first.id), method: :delete do %>
+				<span >Dislike</span> <% end %>
+	
+	<% else %>
 			<%= link_to likes_path(post_id: post.id), method: :post do %>
-				<span >Like</span>
-			<% end %>
-		<% end %>
+				<span >Like</span> <% end %>
+	<% end %>
+		<br><span>Comments: <span> <br> <br>
   <%= render post.comments %>
   <%= render partial: 'comments/form', locals: { post_id: post.id } %>
-	</ul>
+	</div>
   <% end %>
-</div>
+  
+  </body>
 
 
 
