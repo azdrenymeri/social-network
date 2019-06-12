@@ -1,13 +1,12 @@
 FactoryBot.define do
   
   factory :user do
-    email {"john.doe@example.com"}
-    password {"thisismypassword"}
+    email { Faker::Internet.email }
+    password { Faker::Name.name }
   end
 
   factory :post do 
     user
-    title {"Yay factory post"}
     content {"This is factory content of a post"}
   end
 

@@ -9,11 +9,6 @@ RSpec.describe Post, type: :model do
         expect(@post).to be_valid
     end
 
-    it "is not valid without title" do
-        post = FactoryBot.build(:post,title:nil) 
-        expect(post).not_to be_valid
-    end
-
     it "is not valid without content" do 
         post = FactoryBot.build(:post,content:nil)
         expect(post).not_to be_valid

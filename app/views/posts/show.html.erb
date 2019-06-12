@@ -1,4 +1,5 @@
-<h1> <%= @post.title%> 
+<% if @post %>
+  <h1> <%= @post.title%> 
 <% if current_user == @post.user %>
 		&nbsp;&nbsp; <%= link_to 'Destroy', post_path(@post),
             data: {:confirm => 'Are you sure?'}, :method => :delete %>
@@ -25,6 +26,9 @@
 <% end %>
 
 <%= render partial: 'comments/form', locals: { post_id: @post.id } %>
+<% else %>
+<h1> Something went wrong please try again </h1>
+<% end %>
 
 
 
