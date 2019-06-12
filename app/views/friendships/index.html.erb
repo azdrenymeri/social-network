@@ -1,3 +1,4 @@
+<div class="body">
 <% if @pending.count > 0 %>
     <hr/>
     <h3> Pending friend friendships </h3>
@@ -23,9 +24,9 @@
     <% @friend_list.each do |friend|%>
         <ul>
            <li>
-            <% if friend.photo %>
-            <img alt="friend" src=<%= friend.photo %> /> -  
-            <% end %>
+            <% if friend.picture.attached? %>
+	<%= image_tag @friend.picture ,:class=>"profile_big" %>
+<% end %>
             <%= friend.email%> 
            </li>
         <ul>
@@ -34,3 +35,4 @@
 <% else %>
     <h3> You dont have any friends </h3>
 <% end %>
+</div>

@@ -1,5 +1,6 @@
 <%= form_for @post ,controller:"posts",action:"create", method:"POST" do |f| %>
     
+    <h2>Create new post</h2>
     <br/><br/>
     <%= f.text_area :content ,placeholder: "Content"%><br>
     <%= f.file_field :picture %><br/>
