@@ -1,9 +1,6 @@
-<div class="body">
-<br>
-Profile photo
-<br>
+<div>
 <% if @user.picture.attached? %>
-	<%= image_tag @user.picture ,:class=>"profile_big" %>
+	<%= image_tag @user.picture ,:class=>"medium-profile-image" %>
 <% end %>
 <h2> <%= @user.email%> </h2> 
 

@@ -1,26 +1,44 @@
-<h1> Wellcome To your feeds </h1>
+<h1 class="post-container"> Wellcome To your feeds </h1>
 <%= render './shared/new_post' %>
 <hr/>
 <% @posts.each do |post| %>
-  <ul>
-  
-   <li> </strong>- <%= post.content %>  <% if current_user == post.user %>
-		&nbsp;&nbsp; <%= link_to 'Destroy', post_path(post),
-            data: {:confirm => 'Are you sure?'}, :method => :delete %>
-		
-	<% end %></li>
-  <li> - Created By:  <%= post.user.email %>  </li>
-  <li> - Likes:  <%= post.likes.count %>  </li>
-  <% if post.likes.pluck(:user_id).include?(current_user.id) %>
-			<%= link_to like_path(post.likes.where(user_id: current_user.id).first.id), method: :delete do %>
-				<span >Dislike</span>
-			<% end %>
-		<% else %>
-			<%= link_to likes_path(post_id: post.id), method: :post do %>
-				<span >Like</span>
-			<% end %>
-		<% end %>
-  <%= render post.comments %>
-  <%= render partial: 'comments/form', locals: { post_id: post.id } %>
-	</ul>
+<div class="post-container">
+<div class="card mb-3">
+  <h3 class="card-header">Post From: <%= post.user.email %></h3>
+  <% if post.picture.attached? %>
+    <%= image_tag post.picture ,class:"post-picture" %>
   <% end %>
+  <div class="card-body">
+    <p class="card-text"><%= post.content %></p>
+  </div>
+
+  <div class="card-body">
+    <a href="#" class="card-link"> <%= post.likes.count %> Likes</a>
+  
+    <% if post.likes.pluck(:user_id).include?(current_user.id) %>
+		<%= link_to "Dislike", like_path(post.likes.where(user_id: current_user.id).first.id),
+			 method:"DELETE",class:"card-link" %>
+			
+		<% else %>
+			<%= link_to "Like", likes_path(post_id: post.id), method: "POST",class:"card-link" %>
+	<% end %>
+  </div>
+ 
+	<ul class="list-group list-group-flush">
+	<% post.comments.each do |comment| %>
+	  <li class="list-group-item">
+    
+     <%= comment.content %> 
+     
+     </li>
+	<% end %>
+	</ul>
+  <div class="card-footer text-muted">
+    <%= time_ago_in_words(post.created_at) %>
+  </div>
+  <%= render partial: 'comments/form', locals: { post_id: post.id } %>
+</div>
+
+</div>
+</div>
+<% end %>

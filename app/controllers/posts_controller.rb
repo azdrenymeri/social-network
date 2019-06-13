@@ -4,10 +4,6 @@ class PostsController < ApplicationController
     def index
         @post = Post.new
         @posts = Post.feeds(current_user)
-        
-        @users= User.all
-        @comments=Comment.all
-        @likes=Like.all
     end
 
     def new
