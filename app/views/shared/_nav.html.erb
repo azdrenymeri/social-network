@@ -31,9 +31,9 @@
     <li class="nav-item"> <%= link_to "Friends", friendships_path,class:"nav-link" %>
    <% end %>
 <% else %>
-    <%= link_to "Login in", new_user_session_path %>
-  | <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path %> 
-  | <%= link_to "Sign up",new_user_registration_path %>
+  <li class="nav-item"> <%= link_to "Login in", new_user_session_path,class:"nav-link" %>  </li>
+  <li class="nav-item"> <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path,class:"nav-link" %>  </li>
+  <li class="nav-item"> <%= link_to "Sign up",new_user_registration_path,class:"nav-link" %> </li>
   
 <% end %>
     </ul>

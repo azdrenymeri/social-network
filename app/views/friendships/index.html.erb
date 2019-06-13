@@ -1,14 +1,27 @@
-<div class="body">
+<div class="container">
+  <div class="row"> 
+    <div class="container"> 
 <% if @pending.count > 0 %>
-    <hr/>
     <h3> Pending friend friendships </h3>
     <% @pending.each do |friendship| %>
-      <%= friendship.sender.email %> - 
-      <% friendship.status = Friendship.statuses[:accepted] %>
-      <%= link_to "Accept", change_friendship_path(friendship.id,Friendship.statuses[:accepted]),method: :put %> 
+    <div class="col-md-2">
+    <div class="card">
+  <div class="card-body">
+    <h4 class="card-title"><%= friendship.sender.email %></h4>
+    <% friendship.status = Friendship.statuses[:accepted] %>
+    <h6 class="card-subtitle mb-2 text-muted">time_ago_in_words(friendship.created_at)</h6>
+    <a href="#" class="card-link"></a>
+    <%= link_to "View profile",user_path(friendship.sender),clas:"card-link" %>
+     <%= link_to "Accept", change_friendship_path(friendship.id,Friendship.statuses[:accepted]),method: :put,class:"card-link" %> 
+  </div>
+</div>
+    </div>
     <% end %>
   <hr/>
 <% end %>
+</div>
+</div>
+
 
 <% if @sended.count > 0 %>
     <h3> Friend friendships that I have sended </h3>
@@ -33,6 +46,6 @@
     <% end %>
     <hr/>
 <% else %>
-    <h3> You dont have any friends </h3>
+    <h2> You dont have any friends </h2>
 <% end %>
 </div>
