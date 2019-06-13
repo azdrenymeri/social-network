@@ -1,9 +1,9 @@
-<center>
+<div class="body">
 <br>
-"Profile photo"
-<%# <img alt="profile picture" src = <%= @user.photo %> /> %>
+Profile photo
+<br>
 <% if @user.picture.attached? %>
-	<image src="<%=(url_for(@user.picture))%>">
+	<%= image_tag @user.picture ,:class=>"profile_big" %>
 <% end %>
 <h2> <%= @user.email%> </h2> 
 
@@ -17,7 +17,7 @@
 		
 	<% end %></li>
   <% if post.picture.attached? %>
-	<image src="<%=(url_for(post.picture))%>">
+	<%= image_tag post.picture ,:class=>"profile_big" %>
 <% end %>
   <li> - Created By:  <%= post.user.email %>  </li>
   <li> - Likes:  <%= post.likes.count %>  </li>
@@ -34,7 +34,7 @@
   <%= render partial: 'comments/form', locals: { post_id: post.id } %>
 	</ul>
   <% end %>
-</center>
+</div>
 
 
 

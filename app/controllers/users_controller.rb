@@ -3,20 +3,22 @@ class UsersController < ApplicationController
 
     def index
         @users = User.people_you_might_know(current_user)
-        @strangers = User.all - User.people_you_might_know(current_user)
-        @z=User.all
-        
     end
 
     def edit
         @user=User.find(params[:id])
+        
     end
 
     def update
-        @user = Article.find(params[:id])
-        @user.update(name: params[:name], bio: params[:bio])
-        @user.avatar.attach(params[:avatar])
-        redirect_to feeds_path
+        @user = User.find(params[:id])
+        if params[:user][:picture].nil?
+            render "edit"
+        else
+            @user.picture.purge
+            @user.picture.attach(params[:user][:picture])
+            redirect_to root_path
+        end
     end
 
     def show
@@ -25,6 +27,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:id)
+        params.require(:user).permit(:id, :picture)
     end
 end

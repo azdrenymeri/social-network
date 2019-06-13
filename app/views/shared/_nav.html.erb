@@ -1,12 +1,14 @@
+<ul class="nav-bar">
+
 <% if user_signed_in? %>
-  <% if current_user.photo %>
-    <img class="main-img" alt="image" src = <%= current_user.photo %> />
-  <% end %>
+  <% if current_user.picture.attached? %>
+	<%= image_tag current_user.picture, :class => "profile_image"%>
+<% end %>
    Wellcome <strong> <%= current_user.email  %> </strong>
    | <%= link_to "Main", root_path %>
    | <%= link_to "Create Post", new_post_path %> 
    | <%= link_to "Profile", user_path(current_user.id)%>
-   | <%= link_to "Edit profile", edit_user_path(current_user)%> 
+   | <%= link_to "Edit profile picture", edit_user_path(current_user)%> 
    | <%= link_to "Sign out", destroy_user_session_path,method:"DELETE" %>
    | <%= link_to "People you might know", users_path ,method:"GET"%>
    
@@ -21,3 +23,4 @@
   | <%= link_to "Sign up",new_user_registration_path %>
   
 <% end %>
+</ul>

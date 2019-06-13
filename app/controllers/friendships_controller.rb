@@ -5,7 +5,6 @@ class FriendshipsController < ApplicationController
       @pending = User.pending_friend_requests(current_user)
       @sended = User.sended_pending_friend_requests(current_user)
       @friend_list = User.friend_list(current_user)
-      @strangers= User.all - User.pending_friend_requests(current_user) - User.sended_pending_friend_requests(current_user) - User.friend_list(current_user)
     end
 
   def new
