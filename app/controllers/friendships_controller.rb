@@ -32,9 +32,11 @@ class FriendshipsController < ApplicationController
 
     def destroy
       
-      friendship = Friendship.cancel_friendship(params[:id])
+      friendship = Friendship.cancel_friendship(current_user.id,params[:id])
+      fr =  Friendship.destroy(friendship.first.id)
 
-      if friendship.destroy
+
+      if fr.destroyed?
         flash[:success] = "Success"
       else
         flash[:dange] = "Something went wrong"

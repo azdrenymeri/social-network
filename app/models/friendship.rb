@@ -14,14 +14,17 @@ class Friendship < ApplicationRecord
     # cancelled
     # blocked
     def self.change_status(id,status)
-      friendship = Friendship.find(id:id.to_i)
+      friendship = Friendship.find(id.to_i)
       friendship.status = status.to_i
       friendship
     end
 
-    def self.cancel_friendship(id)
-      friendship = Friendship.find(id.to_i)
-      friendship
+    def self.cancel_friendship(current_user_id,id)
+     
+      friendship = Friendship.where("user1_id = ? AND user2_id = ?",current_user_id,id)
+      .or(where("user1_id= ? AND user2_id = ?",id,current_user_id))
+    
+      return friendship
     end
 
 

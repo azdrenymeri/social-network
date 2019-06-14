@@ -26,7 +26,10 @@
    
    <% if User.pending_friend_requests(current_user).count > 0 %>
     <li class="nav-item"> 
-    You have <%= link_to User.pending_friend_requests(current_user).count,friendships_path,class:"nav-link" %> friend requests </li>
+    <%= link_to friendships_path,class:"nav-link" do %>  
+     <strong>You have <%= pluralize(User.pending_friend_requests(current_user).count, 'friend request') %> </strong>
+      <% end %>
+    </li>
     <% else %>
     <li class="nav-item"> <%= link_to "Friends", friendships_path,class:"nav-link" %>
    <% end %>
