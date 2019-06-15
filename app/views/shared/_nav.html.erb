@@ -20,7 +20,14 @@
     <li class="nav-item"> <%= link_to "Main", root_path,class:"nav-link" %> </li>
     <li class="nav-item"> <%= link_to "Create Post", new_post_path,class:"nav-link"  %>  </li>
     <li class="nav-item"> <%= link_to "My Profile", user_path(current_user.id),class:"nav-link" %> </li>
-    <li class="nav-item"> <%= link_to "Edit profile picture", edit_user_path(current_user),class:"nav-link" %>  </li>
+    <li class="nav-item">
+     <% if !current_user.picture.attached? %>
+     <strong>
+     <%= link_to "Set your profile picture", edit_user_path(current_user),class:"nav-link" %>  
+      <strong>
+      <% end %>
+     </li>
+    
     <li class="nav-item"> <%= link_to "Sign out", destroy_user_session_path, method:"DELETE",class:"nav-link" %> </li>
     <li class="nav-item"> <%= link_to "People you might know", users_path ,class:"nav-link"%> </li>
    
@@ -34,7 +41,7 @@
     <li class="nav-item"> <%= link_to "Friends", friendships_path,class:"nav-link" %>
    <% end %>
 <% else %>
-  <li class="nav-item"> <%= link_to "Login in", new_user_session_path,class:"nav-link" %>  </li>
+  <li class="nav-item"> <%= link_to "Login", new_user_session_path,class:"nav-link" %>  </li>
   <li class="nav-item"> <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path,class:"nav-link" %>  </li>
   <li class="nav-item"> <%= link_to "Sign up",new_user_registration_path,class:"nav-link" %> </li>
   

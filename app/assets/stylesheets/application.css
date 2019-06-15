@@ -23,8 +23,18 @@
     height: 40px;
     width: 40px;
 }
+.post-head-image {
+    border-radius: 50%;
+    height: 36px;
+    width: 36px;
+}
+.comment-image {
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+}
 .medium-profile-image {
-    border-radius: 10%;
+    border-radius: 50%;
     height: 300px;
     width: 300px;
     margin: auto;
@@ -52,4 +62,37 @@
 .login-container {
     margin: auto;
     width: 50%;
+}
+.comment {
+    font-size: 95%;
+    padding: 8px 10px 8px 10px;
+    font-size: 80%;
+    max-width: 75%;
+    white-space: initial;
+}
+.comment-time-ago {
+    font-style: italic;
+    font-size: 10px;
+   
+}
+.comment-content {
+    word-wrap: break-word;
+}
+.center-content {
+    display: block;
+    text-align: center;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.alert-alert{
+    background-color: #FF4136;
+    border-color: #ff291d;
+}
+.alert-notice {
+    background-color: #FF851B;
+    border-color: #ff7702;
+}
+.alert-container{
+    margin-top: 7%;
 }
