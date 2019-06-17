@@ -87,4 +87,19 @@ class User < ApplicationRecord
     end
     might_know
   end
+
+  def feeds
+    
+    posts = Array.new
+  #  TODO optimize
+    friend_list.each do |friend|
+      friend.posts.each do |post|
+        posts << post
+      end
+    end
+
+   self.posts.each {|p| posts << p}
+
+    posts
+  end
 end

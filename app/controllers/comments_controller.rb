@@ -7,11 +7,7 @@ class CommentsController < ApplicationController
     end
 
     def new
-        if current_user
-            @comment = Comment.new
-        else
-            redirect_to login_path 
-        end
+       @comment = Comment.new
     end
     
     def show

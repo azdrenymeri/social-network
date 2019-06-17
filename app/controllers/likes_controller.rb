@@ -20,14 +20,5 @@ class LikesController < ApplicationController
       @like.destroy
       redirect_back(fallback_location: root_path) 
     end
-  
-    private
-  
-     def correct_user
-        @like = Like.find(params[:id])
-        unless current_user == @like.user
-          flash[:warning] = "You are not authorized."
-          redirect_back(fallback_location: root_path)
-        end
-      end
+
 end

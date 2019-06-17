@@ -12,15 +12,18 @@ class FriendshipsController < ApplicationController
   end
   
   def create
-    @friendship = Friendship.new
-    @friendship.sender = current_user
-    @friendship.reciever = User.find(params[:user_id])
-    @friendship.status=:pending
-    @friendship.save!
-    redirect_back(fallback_location: root_path) 
+    
+    @friendship = Friendship.new(sender:current_user,reciever: User.find(friendship_param[:user_id]),status: 0)
+
+     if @friendship.save
+        flash[:success] = "Success"
+        redirect_to users_path
+     else
+        flash[:danger] = "Something went wrong" 
+     end
   end
 
-    def change
+    def update
       friendship =  Friendship.change_status(params[:friendship],params[:status])
       
       if friendship.save
@@ -32,9 +35,7 @@ class FriendshipsController < ApplicationController
 
     def destroy
       
-      friendship = Friendship.cancel_friendship(params[:id])
-      fr =  Friendship.destroy(friendship.id)
-
+      fr =  Friendship.destroy(params[:id])
 
       if fr.destroyed?
         flash[:success] = "Success"
@@ -43,5 +44,12 @@ class FriendshipsController < ApplicationController
       end
 
       redirect_to friendships_path
+    end
+
+
+    private
+    
+    def friendship_param
+      params.permit(:user_id)
     end
 end
