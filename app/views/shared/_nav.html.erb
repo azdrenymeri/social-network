@@ -31,10 +31,10 @@
     <li class="nav-item"> <%= link_to "Sign out", destroy_user_session_path, method:"DELETE",class:"nav-link" %> </li>
     <li class="nav-item"> <%= link_to "People you might know", users_path ,class:"nav-link"%> </li>
    
-   <% if User.pending_friend_requests(current_user).count > 0 %>
+   <% if current_user.pending_friend_requests.count > 0 %>
     <li class="nav-item"> 
     <%= link_to friendships_path,class:"nav-link" do %>  
-     <strong>You have <%= pluralize(User.pending_friend_requests(current_user).count, 'friend request') %> </strong>
+     <strong>You have <%= pluralize(current_user.pending_friend_requests.count, 'friend request') %> </strong>
       <% end %>
     </li>
     <% else %>

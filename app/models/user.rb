@@ -37,29 +37,27 @@ class User < ApplicationRecord
   end
 
   # get all pending requests for a user
-  def self.pending_friend_requests(user)
-  recieved =  user.recieved_friend_requests.where(status: Friendship.statuses[:pending])
-  recieved
+  def pending_friend_requests
+    self.recieved_friend_requests.where(status: Friendship.statuses[:pending])
   end
   
   # get all requests that you have sended to other users
-  def self.sended_pending_friend_requests(user)
-   sended =  user.sended_friend_requests.where(status: Friendship.statuses[:pending])
-   sended
+  def sended_pending_friend_requests
+    self.sended_friend_requests.where(status: Friendship.statuses[:pending])
   end
 
   # get all friends that have been accepted
-  def self.friend_list(user)
+  def friend_list
  
     lst = Array.new
     
-    sended = user.sended_friend_requests.where(status: Friendship.statuses[:accepted])
+    sended = self.sended_friend_requests.where(status: Friendship.statuses[:accepted])
     
     sended.each do |request|
      lst << request.reciever
     end
 
-    recieved = user.recieved_friend_requests.where(status: Friendship.statuses[:accepted])
+    recieved = self.recieved_friend_requests.where(status: Friendship.statuses[:accepted])
 
     recieved.each do |request|
       lst << request.sender
@@ -68,12 +66,13 @@ class User < ApplicationRecord
     lst
   end
 
-  def self.people_you_might_know(user)
+  def people_you_might_know
     # might_know  = User.where(id: User.friend_list(user).pluck(:id).to_a)
-    might_know = User.where.not("id = ?",user.id)
-    recieved_friend_requests = User.pending_friend_requests(user).pluck("user1_id")
-    sended_friend_requests  =  User.sended_pending_friend_requests(user).pluck("user2_id")
-    friends = User.friend_list(user)
+   
+    might_know = User.where.not("id = ?",self.id)
+    recieved_friend_requests = pending_friend_requests.pluck("user1_id")
+    sended_friend_requests  =  sended_pending_friend_requests.pluck("user2_id")
+    friends = friend_list
 
     if recieved_friend_requests.any?
       might_know = might_know.where.not(id:recieved_friend_requests)

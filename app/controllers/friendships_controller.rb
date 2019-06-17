@@ -2,9 +2,9 @@ class FriendshipsController < ApplicationController
     before_action :authenticate_user!
 
     def index
-      @pending = User.pending_friend_requests(current_user)
-      @sended = User.sended_pending_friend_requests(current_user)
-      @friendships = Friendship.friend_list(current_user)
+      @pending = current_user.pending_friend_requests
+      @sended = current_user.sended_pending_friend_requests
+      @friendships = current_user.friend_list
     end
 
   def new

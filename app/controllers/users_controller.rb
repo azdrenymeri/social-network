@@ -2,16 +2,16 @@ class UsersController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @users = User.people_you_might_know(current_user)
+        @users = current_user.people_you_might_know 
     end
 
     def edit
-        @user=User.find(params[:id])
+        @user = User.find(params[:id])
         
     end
 
     def update
-        byebug
+       
         if  user_params[:id].blank? or
             user_params[:name].blank? or 
             user_params[:bio].blank? or 
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
                 flash[:success] = "Your profile was set successfuly"
                 redirect_to user_path(@user)
             else
-                flash[:danger] = "Something went wrong we couln't set your data"
+                flash[:danger] = "Something went wrong we couldn't update your data"
                 render "edit" 
             end
         end
