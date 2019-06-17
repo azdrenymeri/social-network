@@ -19,12 +19,17 @@ class Friendship < ApplicationRecord
       friendship
     end
 
-    def self.cancel_friendship(current_user_id,id)
+    def self.cancel_friendship(id)
      
-      friendship = Friendship.where("user1_id = ? AND user2_id = ?",current_user_id,id)
-      .or(where("user1_id= ? AND user2_id = ?",id,current_user_id))
-    
+      friendship = Friendship.find(id.to_i)
+  
       return friendship
+    end
+
+    def self.friend_list(user)
+
+      friendship = Friendship.where("user1_id = ? AND status = 1 OR user2_id = ? AND status = 1 ",user.id,user.id)
+      friendship
     end
 
 

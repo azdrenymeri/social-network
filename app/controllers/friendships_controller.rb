@@ -4,7 +4,7 @@ class FriendshipsController < ApplicationController
     def index
       @pending = User.pending_friend_requests(current_user)
       @sended = User.sended_pending_friend_requests(current_user)
-      @friend_list = User.friend_list(current_user)
+      @friendships = Friendship.friend_list(current_user)
     end
 
   def new
@@ -32,8 +32,8 @@ class FriendshipsController < ApplicationController
 
     def destroy
       
-      friendship = Friendship.cancel_friendship(current_user.id,params[:id])
-      fr =  Friendship.destroy(friendship.first.id)
+      friendship = Friendship.cancel_friendship(params[:id])
+      fr =  Friendship.destroy(friendship.id)
 
 
       if fr.destroyed?
