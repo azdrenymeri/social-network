@@ -10,7 +10,10 @@
          <%= image_tag user.picture, :class => "profile_image" %>
       <% end %>
     <%= user.email %> </h5>
-    <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+    
+    <% if user.bio %>
+      <h6 class="card-subtitle mb-2 text-muted"> <%= user.bio %> </h6>
+    <% end %>
     <%= link_to "Send friend request", friendships_path(user_id: user.id),method: :post,class:"card-link" %>
     <%= link_to "View profile",user_path(user),class:"card-link" %>
   </div>

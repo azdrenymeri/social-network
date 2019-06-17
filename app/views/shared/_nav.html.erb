@@ -21,9 +21,9 @@
     <li class="nav-item"> <%= link_to "Create Post", new_post_path,class:"nav-link"  %>  </li>
     <li class="nav-item"> <%= link_to "My Profile", user_path(current_user.id),class:"nav-link" %> </li>
     <li class="nav-item">
-     <% if !current_user.picture.attached? %>
+     <% if !current_user.picture.attached? or current_user.name.nil? %>
      <strong>
-     <%= link_to "Set your profile picture", edit_user_path(current_user),class:"nav-link" %>  
+     <%= link_to "complete your signup process !", edit_user_path(current_user),class:"nav-link" %>  
       </strong>
       <% end %>
      </li>
