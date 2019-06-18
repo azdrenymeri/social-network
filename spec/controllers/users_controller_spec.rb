@@ -5,7 +5,7 @@ RSpec.describe UsersController, type: :controller do
     before(:each) do 
         # @request.env["devise.mapping"] = Devise.mappings[:user]
         @user = FactoryBot.create(:user)
-        visit "/"
+        visit  new_user_session_path
         login (@user)
     end
     it "renders index template with users you might know" do 

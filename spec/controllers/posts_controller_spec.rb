@@ -4,7 +4,7 @@ RSpec.describe PostsController, type: :controller do
     before(:each) do 
         @request.env["devise.mapping"] = Devise.mappings[:user]
         @user = FactoryBot.create(:user)
-        visit "/"
+        visit  new_user_session_path
         login (@user)
     end
 

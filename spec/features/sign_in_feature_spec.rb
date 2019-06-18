@@ -4,7 +4,7 @@ RSpec.feature "User logins and logouts", type: :feature do
 
   scenario "sign in user with correct user details" do
 
-    visit "/users/login"
+    visit  new_user_session_path
 
     user = FactoryBot.create(:user, email: "azdren@gmail.com", password: "1234567")
     login(user)
@@ -17,7 +17,7 @@ RSpec.feature "User logins and logouts", type: :feature do
 
   scenario "Sign out the user" do 
     
-    visit "/users/login"
+    visit  new_user_session_path
 
     user = FactoryBot.create(:user, email: "azdren@gmail.com", password: "1234567")
     login(user)

@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe FriendshipsController, type: :controller do
     before(:each) do 
         @user = FactoryBot.create(:user)
-        visit "/"
+        visit  new_user_session_path
         login (@user)
 
-        @pending = User.pending_friend_requests(@user)
-        @sended = User.sended_pending_friend_requests(@user)
-        @friend_list = User.friend_list(@user)
+        @pending = @user.pending_friend_requests
+        @sended = @user.sended_pending_friend_requests
+        @friend_list = @user.friend_list
     end
     it "renders the main friendship index template" do 
         visit friendships_path
