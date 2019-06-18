@@ -1,0 +1,25 @@
+<div class="container"> 
+  <div class="row"> 
+    <% @users.each do |user| %>
+       <div class="col-md-3">
+        
+       <div class="card">
+        <div class="card-body">
+    <h5 class="card-title"> 
+      <% if user.picture.attached? %>
+         <%= image_tag user.picture, :class => "profile_image" %>
+      <% end %>
+    <%= user.email %> </h5>
+    
+    <% if user.bio %>
+      <h6 class="card-subtitle mb-2 text-muted"> <%= user.bio %> </h6>
+    <% end %>
+    <%= link_to "Send friend request", friendships_path(user_id: user.id),method: :post,class:"card-link" %>
+    <%= link_to "View profile",user_path(user),class:"card-link" %>
+  </div>
+</div>
+       
+       </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+<div class="container">
+<div class="row"> 
+	<div class="col-md-4"> </div>
+	<div class="col-md-4"> 
+	<div class="container"> 
+		<% if @user.picture.attached? %>
+		<%= image_tag @user.picture ,:class=>"medium-profile-image center-content" %>
+
+	<% end %>
+	
+  <% if @user.name %>
+    <h3 class="center-content"> <%= @user.name%> </h3> 
+  <% end %>
+    <h5 class="center-content"> <%= @user.email%> </h5> 
+	
+  <% if @user.bio %>
+    <p class="text-primary center-content"> <%= @user.bio %> </p>
+  <% end %>
+	<% if @user == current_user %>
+	</br>
+	  <%= link_to "Edit your profile", edit_user_path(current_user),class:"btn btn-secondary center-content" %>
+	<% end %>
+	</div>
+
+	</div>
+	<div class="col-md-4"> </div>
+</div>
+<hr/>
+</div>
+
+<% @user.posts.each do |post| %>
+<div class="post-container">
+<div class="card mb-3">
+  <h4 class="card-header">
+    <% if post.user.picture.attached? %>
+	      <%= image_tag post.user.picture, :class => "post-head-image"%>
+    <% end %>
+  
+  Post From: <%= post.user.email %></h4>
+  <% if post.picture.attached? %>
+    <%= image_tag post.picture ,class:"post-picture" %>
+  <% end %>
+  <div class="card-body">
+    <p class="card-text"><%= post.content %></p>
+  </div>
+
+  <div class="card-body">
+    <a href="#" class="card-link"> <%= post.likes.count %> Likes</a>
+  
+    <% if post.likes.pluck(:user_id).include?(current_user.id) %>
+		<%= link_to "Dislike", like_path(post.likes.where(user_id: current_user.id).first.id),
+			 method:"DELETE",class:"card-link" %>
+			
+		<% else %>
+			<%= link_to "Like", likes_path(post_id: post.id), method: "POST",class:"card-link" %>
+	<% end %>
+  </div>
+ 
+	<ul class="list-group list-group-flush">
+	<% post.comments.each do |comment| %>
+	  <li class="list-group-item">
+        <% if comment.user.picture.attached? %>
+        <%= image_tag comment.user.picture ,class:"comment-image" %>
+  <% end %>
+    <span class="badge badge-pill badge-secondary comment"> <%= comment.content %>  </span>
+    &nbsp
+     <% if current_user == comment.user %>
+		<%= link_to comment_path(comment),method: :delete do %>
+		
+      <span class="badge badge-pill badge-danger"> delete </span>
+        <% end %>
+      <% end %>
+      &nbsp &nbsp 
+      <span class="text-muted comment-time-ago"> <%= time_ago_in_words(comment.created_at) %> </span>
+      
+     
+    </li>
+	<% end %>
+	</ul>
+  <div class="card-footer text-muted">
+    <%= time_ago_in_words(post.created_at) %>
+  </div>
+  <%= render partial: 'comments/form', locals: { post_id: post.id } %>
+</div>
+
+</div>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

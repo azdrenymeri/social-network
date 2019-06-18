@@ -1,0 +1,51 @@
+<ul class="nav-bar">
+
+
+</ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <%= link_to "Fun Look",root_url,class:"navbar-brand" %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav mr-auto">
+    <% if user_signed_in? %>
+      <li class="nav-item"> 
+        <% if current_user.picture.attached? %>
+	      <%= image_tag current_user.picture, :class => "profile_image"%>
+        <% end %>
+      </li>
+    <li class="nav-item"> <strong> <%= link_to current_user.email,user_path(current_user.id) ,class:"nav-link" %></strong> </li>
+    <li class="nav-item"> <%= link_to "Main", root_path,class:"nav-link" %> </li>
+    <li class="nav-item"> <%= link_to "Create Post", new_post_path,class:"nav-link"  %>  </li>
+    <li class="nav-item"> <%= link_to "My Profile", user_path(current_user.id),class:"nav-link" %> </li>
+    <li class="nav-item">
+     <% if !current_user.picture.attached? or current_user.name.nil? %>
+     <strong>
+     <%= link_to "complete your signup process !", edit_user_path(current_user),class:"nav-link" %>  
+      </strong>
+      <% end %>
+     </li>
+    
+    <li class="nav-item"> <%= link_to "Sign out", destroy_user_session_path, method:"DELETE",class:"nav-link" %> </li>
+    <li class="nav-item"> <%= link_to "People you might know", users_path ,class:"nav-link"%> </li>
+   
+   <% if current_user.pending_friend_requests.count > 0 %>
+    <li class="nav-item"> 
+    <%= link_to friendships_path,class:"nav-link" do %>  
+     <strong>You have <%= pluralize(current_user.pending_friend_requests.count, 'friend request') %> </strong>
+      <% end %>
+    </li>
+    <% else %>
+    <li class="nav-item"> <%= link_to "Friends", friendships_path,class:"nav-link" %>
+   <% end %>
+<% else %>
+  <li class="nav-item"> <%= link_to "Login", new_user_session_path,class:"nav-link" %>  </li>
+  <li class="nav-item"> <%= link_to "Login with Facebook", user_facebook_omniauth_authorize_path,method: :post,class:"nav-link" %>  </li>
+  <li class="nav-item"> <%= link_to "Sign up",new_user_registration_path,class:"nav-link" %> </li>
+  
+<% end %>
+    </ul>
+  </div>
+</nav>

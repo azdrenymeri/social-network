@@ -1,0 +1,16 @@
+<div class="post-container">
+<%= form_for @post ,controller:"posts",action:"create", method:"POST" do |f| %>
+    
+    <h2>Create new post</h2>
+     
+      <%= f.text_area :content ,class:"form-control",style:"margin-top: 0px; margin-bottom: 0px; height: 123px;"%><br>
+    <div class="form-group">
+      <div class="custom-file">
+      <%= f.file_field :picture,class:"custom-file-input" %>
+      <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+     </div>
+    </div>
+
+<%= f.submit "Create Post",class:"btn btn-primary" %>
+<% end %>
+</div>

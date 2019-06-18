@@ -1,0 +1,14 @@
+<div class="alert-container  container"> 
+<div class="row"> 
+<div class="col-md-3"> </div>
+<% flash.each do |key, value| %>
+<div class="col-md-6" > 
+        <div class="alert alert-<%= key %>">
+        <strong> <%= value %> <strong>
+        </div>
+</div>
+<% end %>
+<div class="col-md-3"> </div>
+</div>
+</div>
+

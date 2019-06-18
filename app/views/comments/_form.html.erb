@@ -1,0 +1,10 @@
+<%= form_for(:comment, url: comments_path) do |f| %>
+		<br/>
+		<%= f.hidden_field :post_id, value: post_id %>
+		<div class="form-group">
+			<%= f.hidden_field :post_id, value: post_id %>
+			<%= f.text_field :content, placeholder: " Write a comment...", class: "form-control form-control-sm comment-container" %>
+			<%= f.submit "Comment" ,class:"btn btn-primary btn-sm" %>
+		</div>
+		
+<% end %>

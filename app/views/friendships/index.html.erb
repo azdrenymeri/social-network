@@ -1,0 +1,121 @@
+<div class="container">
+ <% if @pending.count > 0 %>
+ <h3> Pending friend friendships </h3>
+ <br/>
+  <div class="row"> 
+        <% @pending.each do |friendship| %>
+    <div class="col-md-3">
+    <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+      <% if friendship.sender.picture.attached? %>
+          <%= image_tag friendship.sender.picture, :class => "profile_image"%>
+      <% end %> &nbsp 
+    <%= friendship.sender.email %></h5>
+    <% friendship.status = Friendship.statuses[:accepted] %>
+    <h6 class="card-subtitle mb-2 text-muted"> <%= time_ago_in_words(friendship.created_at) %></h6>
+    <a href="#" class="card-link"></a>
+    <%= link_to "View profile",user_path(friendship.sender),clas:"card-link" %>
+    &nbsp &nbsp &nbsp
+    <%= link_to "Accept", change_friendship_path(friendship.id,Friendship.statuses[:accepted]),method: :put,class:"card-link" %> 
+  </div>
+</div>
+    </div>
+  <% end %>
+  </div>
+  </hr>
+<% end %>
+</div>
+
+<% if @sended.count > 0 %>
+  
+  <div class="container"> 
+    <h3> Friend requests that I have sended </h3>
+    </br>
+    <div class="row">
+    <% @sended.each do |friendship| %>
+    <div class="col-md-3">
+    <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+      <% if friendship.reciever.picture.attached? %>
+          <%= image_tag friendship.reciever.picture, :class => "profile_image"%>
+      <% end %> &nbsp 
+     <%= friendship.reciever.email%> </h5>
+
+    <h6 class="card-subtitle mb-2 text-muted"> <%= time_ago_in_words(friendship.created_at) %></h6>
+    <a href="#" class="card-link"></a>
+    <%= link_to "View profile",user_path(friendship.reciever),clas:"card-link" %>
+    &nbsp &nbsp &nbsp
+     <%= link_to "Cancel", friendship_path(friendship),method: :delete,class:"card-link" %> 
+    </div>
+    </div>
+    </div>
+    <% end %>
+      </div>
+    </div>
+
+<% end %>
+
+
+
+
+
+<% if @friendships.count > 0 %>
+  <div class="container"> 
+    
+    <h3> your Friends list </h3>
+    </br>
+    <div class="row"> 
+     
+    <% @friendships.each do |friendship|%>
+            
+            <% if friendship.sender == current_user %>
+                           <div class="col-md-3"> 
+                <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+       <% if friendship.reciever.picture.attached? %>
+    	        <%= image_tag friendship.reciever.picture ,:class=>"profile_image" %>
+            <% end %> &nbsp 
+    <%= friendship.reciever.email%> </h5>
+  
+    <%= link_to "profile",user_path(friendship.reciever),class:"card-link" %>
+    <%= link_to "Unfriend",friendship_path(friendship),method: :delete,class:"card-link"%>
+  </div>
+</div>
+ </div>  
+            <% else %>
+                         <div class="col-md-3"> 
+                <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+       <% if friendship.sender.picture.attached? %>
+    	        <%= image_tag friend.sender.picture ,:class=>"profile_image" %>
+            <% end %> &nbsp 
+    <%= friendship.sender.email%> </h5>
+  
+    <%= link_to "profile",user_path(friendship.sender),class:"card-link" %>
+    <%= link_to "Unfriend",friendship_path(friendship),method: :delete,class:"card-link"%>
+  </div>
+</div>
+ </div>
+              
+            <% end %>
+
+            
+    <% end %>
+    </div>
+    <hr/>
+  </div>
+  
+
+<% else %>
+<div class="container">
+   
+    
+    <h2> You dont have any friends </h2>
+    </br>
+    </div>
+<% end %>
+</div>
