@@ -1,34 +1,4 @@
-<div class="container">
-<div class="row"> 
-	<div class="col-md-4"> </div>
-	<div class="col-md-4"> 
-	<div class="container"> 
-		<% if @user.picture.attached? %>
-		<%= image_tag @user.picture ,:class=>"medium-profile-image center-content" %>
-
-	<% end %>
-	
-  <% if @user.name %>
-    <h3 class="center-content"> <%= @user.name%> </h3> 
-  <% end %>
-    <h5 class="center-content"> <%= @user.email%> </h5> 
-	
-  <% if @user.bio %>
-    <p class="text-primary center-content"> <%= @user.bio %> </p>
-  <% end %>
-	<% if @user == current_user %>
-	</br>
-	  <%= link_to "Edit your profile", edit_user_path(current_user),class:"btn btn-secondary center-content" %>
-	<% end %>
-	</div>
-
-	</div>
-	<div class="col-md-4"> </div>
-</div>
-<hr/>
-</div>
-
-<% @user.posts.each do |post| %>
+<% @posts.each do |post| %>
 <div class="post-container">
 <div class="card mb-3">
   <h4 class="card-header">
@@ -36,7 +6,13 @@
 	      <%= image_tag post.user.picture, :class => "post-head-image"%>
     <% end %>
   
-  Post From: <%= post.user.email %></h4>
+  Post From: <%= post.user.email %> 
+  <% if post.user == current_user %>
+    <%= link_to "Delete", post_path(post), method: :delete,class:"badge badge-danger badge-pill" %>
+    <%= link_to "Details", post_path(post),class:"badge badge-primary badge-pill"%>
+  <% end %>
+  
+  </h4>
   <% if post.picture.attached? %>
     <%= image_tag post.picture ,class:"post-picture" %>
   <% end %>
@@ -74,6 +50,8 @@
       <span class="text-muted comment-time-ago"> <%= time_ago_in_words(comment.created_at) %> </span>
       
      
+
+
     </li>
 	<% end %>
 	</ul>
@@ -84,18 +62,5 @@
 </div>
 
 </div>
+</div>
 <% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -19,9 +19,9 @@ class Friendship < ApplicationRecord
       friendship
     end
 
+    # TODO try to remove the parameter
     def friend_list(user)
       friendship = self.where("user1_id = ? AND status = 1 OR user2_id = ? AND status = 1 ",user.id,user.id)
-      friendship
     end
 
   end

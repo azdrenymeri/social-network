@@ -2,7 +2,7 @@ FactoryBot.define do
   
   factory :user do
     email { Faker::Internet.email }
-    password { Faker::Name.name }
+    password { "1234567" }
   end
 
   factory :post do 
@@ -23,7 +23,8 @@ FactoryBot.define do
 
   factory :friendship do 
     sender {build(:user)}
-    reciever {build(:user,email:"janed.doe@example.com",password:"thisismypassword")}
+    reciever {build(:user)}
+    status { 0 }
   end
 
 end

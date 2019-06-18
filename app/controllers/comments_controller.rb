@@ -23,8 +23,10 @@ class CommentsController < ApplicationController
     def create
         @comment = current_user.comments.new(comment_params)
         if @comment.save
+          flash[:success] = "Comment created successfuly"
           redirect_back(fallback_location: root_path)
         else
+          flash[:danger] = "There was a problem"
           redirect_back(fallback_location: root_path)
         end
       end

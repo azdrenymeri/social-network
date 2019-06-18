@@ -19,8 +19,8 @@ RSpec.describe Comment, type: :model do
         expect(comment).not_to be_valid
     end
 
-    it "content should not be valid with more than 50 chars" do 
-        comment = FactoryBot.build(:comment,content: (0...51).map { ('a'..'z').to_a[rand(26)] }.join)
+    it "content should not be valid with more than 400 chars" do 
+        comment = FactoryBot.build(:comment,content: (0...401).map { ('a'..'z').to_a[rand(26)] }.join)
         expect(comment).not_to be_valid
     end
 end
