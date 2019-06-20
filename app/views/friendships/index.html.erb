@@ -17,7 +17,8 @@
     <a href="#" class="card-link"></a>
     <%= link_to "View profile",user_path(friendship.sender),clas:"card-link" %>
     &nbsp &nbsp &nbsp
-    <%= link_to "Accept", change_friendship_path(friendship.id,Friendship.statuses[:accepted]),method: :put,class:"card-link" %> 
+    <%= link_to "Accept", change_friendship_path(friendship.id,Friendship.statuses[:accepted]),method: :put,class:"card-link" %>
+    <%= link_to "Cancel", friendship_path(friendship),method: :delete,class:"card-link" %> 
   </div>
 </div>
     </div>
@@ -91,7 +92,7 @@
   <div class="card-body">
     <h5 class="card-title">
        <% if friendship.sender.picture.attached? %>
-    	        <%= image_tag friend.sender.picture ,:class=>"profile_image" %>
+    	        <%= image_tag friendship.sender.picture ,:class=>"profile_image" %>
             <% end %> &nbsp 
     <%= friendship.sender.email%> </h5>
   

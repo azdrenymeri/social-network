@@ -13,10 +13,8 @@ class Friendship < ApplicationRecord
     # accepted
     # cancelled
     # blocked
-    def change_status(id,status)
-      friendship = Friendship.find(id.to_i)
-      friendship.status = status.to_i
-      friendship
+    def change_status
+      self.update(status: 1)
     end
 
     # TODO try to remove the parameter

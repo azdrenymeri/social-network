@@ -12,8 +12,7 @@ class UsersController < ApplicationController
 
     def update
        
-        if  user_params[:id].blank? or
-            user_params[:name].blank? or 
+        if  user_params[:name].blank? or 
             user_params[:bio].blank?
             
             flash[:danger] = "There was an error please check your form and re-submit it again"

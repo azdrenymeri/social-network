@@ -24,25 +24,15 @@ class FriendshipsController < ApplicationController
   end
 
     def update
-      friendship =  Friendship.change_status(params[:friendship],params[:status])
-      
-      if friendship.save
-        flash[:success] = "Success"
-        redirect_to friendships_path
-      end
-
+      @friendship = Friendship.find(params[:friendship])
+      @friendship.change_status
+      redirect_to friendships_path
     end
 
     def destroy
       
-      fr =  Friendship.destroy(params[:id])
-
-      if fr.destroyed?
-        flash[:success] = "Success"
-      else
-        flash[:dange] = "Something went wrong"
-      end
-
+      @friendship =  Friendship.destroy(params[:id])
+      @friendship.destroy
       redirect_to friendships_path
     end
 
