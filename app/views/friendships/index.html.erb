@@ -91,7 +91,7 @@
   <div class="card-body">
     <h5 class="card-title">
        <% if friendship.sender.picture.attached? %>
-    	        <%= image_tag friend.sender.picture ,:class=>"profile_image" %>
+    	        <%= image_tag friendship.sender.picture ,:class=>"profile_image" %>
             <% end %> &nbsp 
     <%= friendship.sender.email%> </h5>
   
@@ -100,10 +100,7 @@
   </div>
 </div>
  </div>
-              
-            <% end %>
-
-            
+            <% end %>   
     <% end %>
     </div>
     <hr/>

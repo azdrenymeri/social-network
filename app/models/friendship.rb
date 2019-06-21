@@ -13,11 +13,11 @@ class Friendship < ApplicationRecord
     # accepted
     # cancelled
     # blocked
-    def change_status(id,status)
-      friendship = Friendship.find(id.to_i)
-      friendship.status = status.to_i
-      friendship
-    end
+    # def change_status(id,status)
+    #   friendship = Friendship.find(id.to_i)
+    #   friendship.status = status.to_i
+    #   friendship
+    # end
 
     # TODO try to remove the parameter
     def friend_list(user)

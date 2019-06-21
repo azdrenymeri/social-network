@@ -24,9 +24,11 @@ class FriendshipsController < ApplicationController
   end
 
     def update
-      friendship =  Friendship.change_status(params[:friendship],params[:status])
+
+      @friendship =  Friendship.find(params[:friendship])
+      @friendship.status = params[:status].to_i
       
-      if friendship.save
+      if @friendship.save
         flash[:success] = "Success"
         redirect_to friendships_path
       end

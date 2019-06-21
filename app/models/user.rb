@@ -14,6 +14,9 @@ class User < ApplicationRecord
   has_many :liked_posts, :through => :likes, :source => :post
   has_many :commented_posts,:through => :comments,:source => :post
 
+  validates :name, presence: true,length:{minimum:2,maximum:50}
+  validates :bio , presence: true,length:{maximum:100}
+  validates :picture, presence:true
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
@@ -54,13 +57,13 @@ class User < ApplicationRecord
     sended = self.sended_friend_requests.where(status: Friendship.statuses[:accepted])
     
     sended.each do |request|
-     lst << request.reciever
+     lst << request
     end
 
     recieved = self.recieved_friend_requests.where(status: Friendship.statuses[:accepted])
 
     recieved.each do |request|
-      lst << request.sender
+      lst << request
     end
     
     lst
