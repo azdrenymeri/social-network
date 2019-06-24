@@ -8,7 +8,7 @@ RSpec.describe FriendshipsController, type: :controller do
 
         @pending = @user.pending_friend_requests
         @sended = @user.sended_pending_friend_requests
-        @friend_list = @user.friend_list
+        @friend_list = @user.friendships
     end
     it "renders the main friendship index template" do 
         visit friendships_path

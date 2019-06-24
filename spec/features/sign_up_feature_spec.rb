@@ -26,6 +26,8 @@ RSpec.feature "User can sign up", type: :feature do
   private
   def sign_up(user)
     fill_in "Email",with: user.email
+    fill_in "Name",with: user.name
+    fill_in "Bio",with: user.bio
     fill_in "Password",with: user.password
     fill_in "Password confirmation",with: user.password
     click_button "Sign up"

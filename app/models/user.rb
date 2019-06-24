@@ -20,10 +20,11 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_create do |user|
+      user.name = 
       user.email = auth.info.email
       user.provider = auth.provider
       user.uid = auth.uid
-      user.photo = auth.info.image
+      user.picture = auth.info.image
     end
   end
   
@@ -49,8 +50,8 @@ class User < ApplicationRecord
     self.sended_friend_requests.where(status: Friendship.statuses[:pending])
   end
 
-  # get all friends that have been accepted
-  def friend_list
+  # get friendships
+  def friendships
  
     lst = Array.new
     
@@ -64,6 +65,25 @@ class User < ApplicationRecord
 
     recieved.each do |request|
       lst << request
+    end
+    
+    lst
+  end
+
+  def friend_list
+ 
+    lst = Array.new
+    
+    sended = self.sended_friend_requests.where(status: Friendship.statuses[:accepted])
+    
+    sended.each do |request|
+     lst << request.reciever
+    end
+
+    recieved = self.recieved_friend_requests.where(status: Friendship.statuses[:accepted])
+
+    recieved.each do |request|
+      lst << request.sender
     end
     
     lst
