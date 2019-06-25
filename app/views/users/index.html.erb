@@ -1,4 +1,6 @@
 <div class="container"> 
+  
+  <% if @users.count > 0 %>
   <div class="row"> 
     <% @users.each do |user| %>
        <div class="col-md-3">
@@ -17,9 +19,12 @@
     <%= link_to "Send friend request", friendships_path(user_id: user.id),method: :post,class:"card-link" %>
     <%= link_to "View profile",user_path(user),class:"card-link" %>
   </div>
-</div>
-       
+  </div>
        </div>
     <% end %>
   </div>
+  <% else %>
+    <h1> No users </h1>
+  <% end %>
+
 </div>
