@@ -116,15 +116,13 @@ class User < ApplicationRecord
     posts = Array.new
   #  TODO optimize
     friend_list.each do |friend|
-      friend.sender.posts.each do |post|
-        posts << post
-      end
-      friend.reciever.posts.each do |post|
-        posts << post
-      end
+     friend.posts.each do |post|
+      posts << post
+     end
     end
-
-   
+    self.posts.each do |post|
+      posts << post
+    end
 
     posts
   end
