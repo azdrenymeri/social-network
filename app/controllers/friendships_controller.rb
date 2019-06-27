@@ -36,16 +36,15 @@ class FriendshipsController < ApplicationController
     end
 
     def destroy
-      
       fr =  Friendship.destroy(params[:id])
 
       if fr.destroyed?
         flash[:success] = "Success"
+        redirect_to friendships_path
       else
         flash[:dange] = "Something went wrong"
+        redirect_to friendships_path
       end
-
-      redirect_to friendships_path
     end
 
 
