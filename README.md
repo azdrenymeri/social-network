@@ -2,6 +2,8 @@
 It's a learning exercise set by [The Odin Project](https://www.theodinproject.com/courses/ruby-on-rails/lessons/final-project?ref=lnav).
 ####  This is a simple facebook clone with basic functionalities
 
+![Alt text](/public/ss.jpg)
+
 * Sign up new users (Devise) 
 * Facebook sing up and log in
 * Make new posts, allow images
