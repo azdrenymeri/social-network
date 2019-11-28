@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # creating users
-azdren = User.create(email:'azdreny@gmail.com',password:'1234567')
-foo = User.create(email:'foo@bar.com',password:'1234567')
-john = User.create(email:'john@example.com',password:'1234567')
-janed = User.create(email:'janed@gmail.com',password:'1234567')
+# azdren = User.create(email:'azdreny@gmail.com',password:'1234567')
+# foo = User.create(email:'foo@bar.com',password:'1234567')
+# john = User.create(email:'john@example.com',password:'1234567')
+# janed = User.create(email:'janed@gmail.com',password:'1234567')
 
 
 # # Now creating posts 

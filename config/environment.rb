@@ -3,3 +3,4 @@ require_relative 'application'
 
 # Initialize the Rails application.
 Rails.application.initialize!
+Rails.application.secret_key_base['c3adc1f7b7d3aecf48190cfd10c115f4e927eebe8188f6d7c414cd33cc6a97a7493d767c1e659fc50633b08e7fa811684ebb82727a268e2207bca7cbccdf905f']
